@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtByNana — Commission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf6f0;--surface:#ffffff;--surface2:#f5efe6;--surface3:#ede4d8;
+  --border:rgba(160,120,80,0.15);--border2:rgba(160,120,80,0.28);
+  --text:#3a2c1e;--text2:#7a6150;--text3:#b09880;
+  --brown:#8b5e3c;--brown2:#c49a72;--cream:#f5ead8;
+  --pink:#e8a0b0;--pink-bg:rgba(232,160,176,0.12);--pink-bd:rgba(232,160,176,0.35);--pink-tx:#b05070;
+  --blue:#7aafc8;--blue-bg:rgba(122,175,200,0.12);--blue-bd:rgba(122,175,200,0.35);--blue-tx:#3a7a9c;
+  --green:#7ab87a;--green-bg:rgba(122,184,122,0.12);
+  --amber:#d4924a;--amber-bg:rgba(212,146,74,0.12);
+  --red-bg:rgba(200,100,100,0.1);--red-tx:#a04040;
+  --purple:#a07ec8;--purple-bg:rgba(160,126,200,0.12);--purple-bd:rgba(160,126,200,0.35);--purple-tx:#6a4a96;
+  --rose:#c86878;--rose-bg:rgba(200,104,120,0.12);--rose-bd:rgba(200,104,120,0.35);--rose-tx:#8a2840;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(250,246,240,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Playfair Display',serif;font-size:20px;color:var(--brown);letter-spacing:.5px}
+.nav-right{display:flex;align-items:center;gap:10px}
+.spill{display:flex;align-items:center;gap:7px;padding:5px 14px;border-radius:100px;font-size:12px;font-weight:500}
+.spill .dot{width:7px;height:7px;border-radius:50%}
+.s-open{background:var(--green-bg);color:#4a8a4a;border:1px solid rgba(122,184,122,.3)}
+.s-open .dot{background:var(--green);animation:blink 2s infinite}
+.s-busy{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(212,146,74,.3)}
+.s-busy .dot{background:var(--amber)}
+.s-closed{background:var(--red-bg);color:var(--red-tx);border:1px solid rgba(200,100,100,.25)}
+.s-closed .dot{background:var(--red-tx)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+.nav-btn{padding:7px 18px;border-radius:8px;background:var(--brown);color:#fdf8f2;font-family:'Noto Sans Thai',sans-serif;font-size:13px;font-weight:500;border:none;cursor:pointer;transition:background .15s}
+.nav-btn:hover{background:#6e4a2c}
+
+/* HERO */
+.hero{padding:72px 24px 56px;text-align:center;background:linear-gradient(180deg,#fdf5e8 0%,var(--bg) 100%);border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;margin-bottom:16px;padding:4px 16px;border-radius:100px;background:var(--pink-bg);color:var(--pink-tx);border:1px solid var(--pink-bd);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,58px);line-height:1.15;color:var(--brown);margin-bottom:12px}
+.hero-title em{font-style:italic;color:var(--pink-tx)}
+.hero-sub{font-size:14px;color:var(--text2);margin-bottom:28px}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-main{padding:11px 28px;border-radius:10px;background:var(--brown);color:#fdf8f2;font-family:'Noto Sans Thai',sans-serif;font-size:14px;font-weight:500;border:none;cursor:pointer;transition:background .15s,transform .15s}
+.btn-main:hover{background:#6e4a2c;transform:translateY(-1px)}
+.btn-ghost{padding:11px 28px;border-radius:10px;background:transparent;color:var(--brown);font-family:'Noto Sans Thai',sans-serif;font-size:14px;font-weight:500;border:1px solid var(--border2);cursor:pointer;transition:all .15s}
+.btn-ghost:hover{background:var(--surface2)}
+
+/* SECTION */
+.sec{padding:56px 24px;max-width:900px;margin:0 auto}
+.sec-tag{display:inline-block;margin-bottom:6px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--blue-tx);font-weight:500}
+.sec-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--brown);margin-bottom:24px}
+hr.sep{border:none;border-top:1px solid var(--border);margin:0 24px}
+
+/* GALLERY */
+.ftabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.ftab{padding:6px 18px;border-radius:100px;font-size:13px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:'Noto Sans Thai',sans-serif;transition:all .15s}
+.ftab:hover{border-color:var(--brown2);color:var(--brown)}
+.ftab.on{background:var(--cream);border-color:var(--brown2);color:var(--brown);font-weight:500}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:580px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gcard{border-radius:14px;overflow:hidden;border:1px solid var(--border);background:var(--surface);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s}
+.gcard:hover{transform:translateY(-3px);border-color:var(--brown2);box-shadow:0 8px 24px rgba(139,94,60,.1)}
+.gthumb{aspect-ratio:1;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:52px;transition:transform .2s}
+.gcard:hover .gthumb{transform:scale(1.04)}
+.ginfo{padding:10px 12px}
+.gcat{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px}
+.gprice{font-size:14px;color:var(--brown);font-weight:500;margin-top:2px}
+
+/* ── CALCULATOR ── */
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:660px){.calc-grid{grid-template-columns:1fr}}
+.calc-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px}
+.calc-row{margin-bottom:20px}
+.clabel{font-size:12px;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;display:block}
+.rrow{display:flex;gap:8px;flex-wrap:wrap}
+.rbtn{padding:7px 17px;border-radius:8px;font-size:13px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:'Noto Sans Thai',sans-serif;transition:all .15s}
+.rbtn:hover{border-color:var(--brown2);color:var(--brown)}
+.rbtn.on{background:var(--cream);border-color:var(--brown2);color:var(--brown);font-weight:500}
+.num-in{width:88px;padding:8px 12px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:15px;font-family:'Noto Sans Thai',sans-serif;outline:none;transition:border-color .15s}
+.num-in:focus{border-color:var(--brown2)}
+.hint{font-size:12px;color:var(--text2);margin-top:8px}
+
+/* usage type buttons (special) */
+.urow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ubtn{padding:9px 10px;border-radius:10px;font-size:12px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:'Noto Sans Thai',sans-serif;transition:all .15s;text-align:left;line-height:1.4}
+.ubtn .u-icon{font-size:16px;display:block;margin-bottom:3px}
+.ubtn .u-name{font-weight:500;font-size:13px;color:var(--text)}
+.ubtn .u-price{font-size:11px;color:var(--text3)}
+.ubtn:hover{border-color:var(--brown2);background:var(--surface2)}
+.ubtn.on-personal  {background:var(--blue-bg);   border-color:var(--blue-bd);  }
+.ubtn.on-personal .u-name{color:var(--blue-tx)}
+.ubtn.on-giveaway  {background:var(--pink-bg);   border-color:var(--pink-bd);  }
+.ubtn.on-giveaway .u-name{color:var(--pink-tx)}
+.ubtn.on-commercial{background:var(--amber-bg);  border-color:rgba(212,146,74,.4);}
+.ubtn.on-commercial .u-name{color:var(--amber)}
+.ubtn.on-exclusive {background:var(--rose-bg);   border-color:var(--rose-bd);  }
+.ubtn.on-exclusive .u-name{color:var(--rose-tx)}
+
+.price-result{margin-top:22px;padding:22px;background:linear-gradient(135deg,var(--cream),#fdf0e0);border:1px solid var(--brown2);border-radius:12px;text-align:center}
+.pr-label{font-size:11px;color:var(--text2);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.pr-big{font-family:'Playfair Display',serif;font-size:36px;color:var(--brown)}
+.pr-note{font-size:12px;color:var(--text3);margin-top:5px}
+.pr-usage-note{font-size:12px;margin-top:8px;padding:8px 12px;border-radius:8px;display:none}
+
+/* ── GUIDE PANEL (shared layout) ── */
+.guide{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.guide-ttl{font-family:'Playfair Display',serif;font-size:17px;color:var(--brown)}
+.guide-sub{font-size:12px;color:var(--text2);margin-top:2px}
+
+/* guide tabs */
+.gtabs{display:flex;gap:6px;flex-wrap:wrap}
+.gtab{padding:5px 14px;border-radius:100px;font-size:12px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:'Noto Sans Thai',sans-serif;transition:all .15s}
+.gtab:hover{border-color:var(--brown2);color:var(--brown)}
+.gtab.active{background:var(--cream);border-color:var(--brown2);color:var(--brown);font-weight:500}
+
+/* guide cards */
+.gc{border-radius:12px;padding:14px 16px;border:1.5px solid;transition:opacity .22s;display:none}
+.gc.show{display:block}
+.gc-s  {border-color:var(--blue-bd);  background:linear-gradient(135deg,var(--blue-bg),  rgba(122,175,200,.03))}
+.gc-d  {border-color:var(--pink-bd);  background:linear-gradient(135deg,var(--pink-bg),  rgba(232,160,176,.03))}
+.gc-p  {border-color:var(--blue-bd);  background:linear-gradient(135deg,var(--blue-bg),  rgba(122,175,200,.03))}
+.gc-g  {border-color:var(--pink-bd);  background:linear-gradient(135deg,var(--pink-bg),  rgba(232,160,176,.03))}
+.gc-c  {border-color:rgba(212,146,74,.4);background:linear-gradient(135deg,var(--amber-bg),rgba(212,146,74,.03))}
+.gc-e  {border-color:var(--rose-bd);  background:linear-gradient(135deg,var(--rose-bg),  rgba(200,104,120,.03))}
+
+.gc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:6px}
+.gc-lbl{font-size:13px;font-weight:500}
+.gc-s .gc-lbl,.gc-p .gc-lbl{color:var(--blue-tx)}
+.gc-d .gc-lbl,.gc-g .gc-lbl{color:var(--pink-tx)}
+.gc-c .gc-lbl{color:var(--amber)}
+.gc-e .gc-lbl{color:var(--rose-tx)}
+.gc-badge{font-size:11px;padding:2px 10px;border-radius:100px}
+.gc-s .gc-badge,.gc-p .gc-badge{background:var(--blue-bg);color:var(--blue-tx);border:1px solid var(--blue-bd)}
+.gc-d .gc-badge,.gc-g .gc-badge{background:var(--pink-bg);color:var(--pink-tx);border:1px solid var(--pink-bd)}
+.gc-c .gc-badge{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(212,146,74,.4)}
+.gc-e .gc-badge{background:var(--rose-bg);color:var(--rose-tx);border:1px solid var(--rose-bd)}
+.gc-body{display:grid;grid-template-columns:72px 1fr;gap:12px;align-items:start}
+.gc-art{aspect-ratio:1;border-radius:8px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-size:34px}
+.gc-s .gc-art,.gc-p .gc-art{border:1px solid var(--blue-bd)}
+.gc-d .gc-art,.gc-g .gc-art{border:1px solid var(--pink-bd)}
+.gc-c .gc-art{border:1px solid rgba(212,146,74,.4)}
+.gc-e .gc-art{border:1px solid var(--rose-bd)}
+.gc-pts{list-style:none}
+.gc-pts li{font-size:12px;color:var(--text2);padding:2.5px 0;display:flex;align-items:flex-start;gap:7px}
+.gc-pts li::before{content:'·';font-size:18px;line-height:1.15;flex-shrink:0}
+.gc-s .gc-pts li::before,.gc-p .gc-pts li::before{color:var(--blue)}
+.gc-d .gc-pts li::before,.gc-g .gc-pts li::before{color:var(--pink)}
+.gc-c .gc-pts li::before{color:var(--amber)}
+.gc-e .gc-pts li::before{color:var(--rose)}
+.guide-note{padding:10px 14px;border-radius:8px;font-size:12px;color:var(--text2);background:var(--surface2);border:1px solid var(--border)}
+
+/* QUEUE */
+.qbox{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.qworking{padding:20px 24px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.qw-lbl{font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:3px}
+.qw-id{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown)}
+.ptrack{display:flex;gap:0;margin-top:10px}
+.pstep{font-size:12px;padding:4px 13px;border:1px solid var(--border2);color:var(--text3);background:var(--surface)}
+.pstep:first-child{border-radius:7px 0 0 7px}
+.pstep:last-child{border-radius:0 7px 7px 0}
+.pstep.done{background:var(--green-bg);color:#4a8a4a;border-color:rgba(122,184,122,.35)}
+.pstep.cur{background:var(--pink-bg);color:var(--pink-tx);border-color:var(--pink-bd)}
+.qcount{font-size:12px;padding:5px 14px;border-radius:100px;background:var(--blue-bg);color:var(--blue-tx);border:1px solid var(--blue-bd);align-self:flex-start}
+.qrow{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;border-bottom:1px solid var(--border);transition:background .1s}
+.qrow:last-child{border-bottom:none}
+.qrow:hover{background:var(--surface2)}
+.qrl{display:flex;align-items:center;gap:14px}
+.qnum{font-size:13px;color:var(--text3);min-width:18px}
+.qid{font-size:14px;font-weight:500;color:var(--brown)}
+.qtype{font-size:13px;color:var(--text2)}
+.qbadge{font-size:11px;padding:3px 10px;border-radius:100px;background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
+.qfoot{padding:10px 24px;font-size:12px;color:var(--text3);text-align:right;border-top:1px solid var(--border)}
+
+/* CONTACT */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.cgrid{grid-template-columns:1fr}}
+.ccard{padding:18px 20px;border-radius:12px;background:var(--surface);border:1px solid var(--border);transition:border-color .15s}
+.ccard:hover{border-color:var(--brown2)}
+.cplat{font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.chandle{font-size:15px;color:var(--brown);font-weight:500}
+.tos{margin-top:20px;padding:18px 20px;border-left:3px solid var(--pink);background:var(--pink-bg);border-radius:0 10px 10px 0}
+.tos-ttl{font-size:12px;color:var(--text2);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.tos-list{list-style:none}
+.tos-list li{font-size:13px;color:var(--text2);padding:3px 0;display:flex;align-items:flex-start;gap:10px}
+.tos-list li::before{content:'→';color:var(--pink-tx);flex-shrink:0}
+footer{padding:28px 24px;text-align:center;font-size:12px;color:var(--text3);border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">ArtByNana ✦</span>
+  <div class="nav-right">
+    <span class="spill s-busy"><span class="dot"></span>รับงานอยู่ · เหลือ 3 คิว</span>
+    <button class="nav-btn" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">คำนวณราคา ↓</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">✦ Digital Art Commission Open ✦</div>
+  <h1 class="hero-title">ออกแบบตัวละครของคุณ<br>ใน<em>สไตล์ที่ใช่</em></h1>
+  <p class="hero-sub">Chibi · Half Body · Full Body · Custom Illustration</p>
+  <div class="hero-btns">
+    <button class="btn-main" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">ดูผลงาน</button>
+    <button class="btn-ghost" onclick="document.getElementById('calculator').scrollIntoView({behavior:'smooth'})">คำนวณราคา</button>
+  </div>
+</section>
+<hr class="sep">
+
+<!-- PORTFOLIO -->
+<section class="sec" id="portfolio">
+  <div class="sec-tag">Portfolio</div>
+  <div class="sec-title">ผลงาน</div>
+  <div class="ftabs">
+    <button class="ftab on" onclick="filt(this,'all')">ทั้งหมด</button>
+    <button class="ftab" onclick="filt(this,'chibi')">Chibi</button>
+    <button class="ftab" onclick="filt(this,'half')">Half Body</button>
+    <button class="ftab" onclick="filt(this,'full')">Full Body</button>
+  </div>
+  <div class="gallery" id="gallery">
+    <div class="gcard" data-cat="chibi"><div class="gthumb">🐣</div><div class="ginfo"><div class="gcat">Chibi</div><div class="gprice">500 – 800฿</div></div></div>
+    <div class="gcard" data-cat="full"><div class="gthumb">🧝</div><div class="ginfo"><div class="gcat">Full Body</div><div class="gprice">1,500 – 2,500฿</div></div></div>
+    <div class="gcard" data-cat="half"><div class="gthumb">🧙</div><div class="ginfo"><div class="gcat">Half Body</div><div class="gprice">800 – 1,200฿</div></div></div>
+    <div class="gcard" data-cat="chibi"><div class="gthumb">🐱</div><div class="ginfo"><div class="gcat">Chibi</div><div class="gprice">500 – 800฿</div></div></div>
+    <div class="gcard" data-cat="full"><div class="gthumb">⚔️</div><div class="ginfo"><div class="gcat">Full Body</div><div class="gprice">1,500 – 2,500฿</div></div></div>
+    <div class="gcard" data-cat="half"><div class="gthumb">🌸</div><div class="ginfo"><div class="gcat">Half Body</div><div class="gprice">800 – 1,200฿</div></div></div>
+  </div>
+</section>
+<hr class="sep">
+
+<!-- CALCULATOR -->
+<section class="sec" id="calculator">
+  <div class="sec-tag">Price Calculator</div>
+  <div class="sec-title">คำนวณราคา</div>
+  <div class="calc-grid">
+
+    <!-- LEFT: form -->
+    <div class="calc-box">
+      <div class="calc-row">
+        <label class="clabel">ประเภทงาน</label>
+        <div class="rrow">
+          <button class="rbtn on" onclick="setOpt('type',this,'chibi')">Chibi</button>
+          <button class="rbtn" onclick="setOpt('type',this,'half')">Half Body</button>
+          <button class="rbtn" onclick="setOpt('type',this,'full')">Full Body</button>
+        </div>
+      </div>
+      <div class="calc-row">
+        <label class="clabel">จำนวนตัวละคร</label>
+        <input class="num-in" type="number" id="chars" min="1" max="5" value="1" oninput="calcPrice()">
+      </div>
+      <div class="calc-row">
+        <label class="clabel">ดีเทลตัวละคร</label>
+        <div class="rrow">
+          <button class="rbtn on" onclick="setOpt('detail',this,'simple')">ปานกลาง</button>
+          <button class="rbtn" onclick="setOpt('detail',this,'detailed')">เยอะ (+50%)</button>
+        </div>
+        <div class="hint">← ดูตัวอย่างได้ที่กล่องด้านขวา (แท็บ "ดีเทล")</div>
+      </div>
+      <div class="calc-row">
+        <label class="clabel">พื้นหลัง</label>
+        <div class="rrow">
+          <button class="rbtn on" onclick="setOpt('bg',this,'none')">ไม่มี</button>
+          <button class="rbtn" onclick="setOpt('bg',this,'simple')">ธรรมดา (+300฿)</button>
+          <button class="rbtn" onclick="setOpt('bg',this,'complex')">ซับซ้อน (+800฿)</button>
+        </div>
+      </div>
+      <div class="calc-row" style="margin-bottom:0">
+        <label class="clabel">วัตถุประสงค์การใช้งาน</label>
+        <div class="urow">
+          <button class="ubtn on-personal" id="ubtn-personal" onclick="setUsage(this,'personal')">
+            <span class="u-icon">🏠</span>
+            <span class="u-name">ส่วนตัว</span>
+            <span class="u-price">ราคาปกติ</span>
+          </button>
+          <button class="ubtn" id="ubtn-giveaway" onclick="setUsage(this,'giveaway')">
+            <span class="u-icon">🎁</span>
+            <span class="u-name">Giveaway</span>
+            <span class="u-price">+50%</span>
+          </button>
+          <button class="ubtn" id="ubtn-commercial" onclick="setUsage(this,'commercial')">
+            <span class="u-icon">🏪</span>
+            <span class="u-name">เชิงพาณิชย์</span>
+            <span class="u-price">+100%</span>
+          </button>
+          <button class="ubtn" id="ubtn-exclusive" onclick="setUsage(this,'exclusive')">
+            <span class="u-icon">🏢</span>
+            <span class="u-name">สิทธิ์ขาด / บริษัท</span>
+            <span class="u-price">ติดต่อโดยตรง</span>
+          </button>
+        </div>
+        <div class="hint">← ดูคำอธิบายได้ที่กล่องด้านขวา (แท็บ "การใช้งาน")</div>
+      </div>
+
+      <div class="price-result">
+        <div class="pr-label">ราคาโดยประมาณ</div>
+        <div class="pr-big" id="price-out">500 – 700฿</div>
+        <div id="exclusive-msg" style="display:none;font-size:13px;color:var(--rose-tx);margin-top:4px">กรุณาทักมาเพื่อรับใบเสนอราคา</div>
+        <div class="pr-note">ราคาจริงขึ้นอยู่กับรายละเอียดงาน · ยืนยันก่อนเริ่มเสมอ</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: guide panel -->
+    <div class="guide">
+      <div>
+        <div class="guide-ttl">คู่มือเลือกตัวเลือก</div>
+        <div class="guide-sub">เลือกดูคำอธิบายแต่ละหัวข้อ</div>
+      </div>
+      <div class="gtabs">
+        <button class="gtab active" onclick="switchGuide(this,'detail')">ดีเทลตัวละคร</button>
+        <button class="gtab" onclick="switchGuide(this,'usage')">การใช้งาน</button>
+      </div>
+
+      <!-- DETAIL guide -->
+      <div id="g-detail">
+        <div class="gc gc-s show" id="gc-simple">
+          <div class="gc-head">
+            <span class="gc-lbl">ปานกลาง (Simple)</span>
+            <span class="gc-badge">ราคาปกติ</span>
+          </div>
+          <div class="gc-body">
+            <div class="gc-art">🐱</div>
+            <ul class="gc-pts">
+              <li>เสื้อผ้าทรงง่าย ลวดลายน้อย</li>
+              <li>ทรงผมไม่ซับซ้อน</li>
+              <li>เครื่องประดับ 1–2 ชิ้น</li>
+              <li>ไม่มี pattern บนชุด หรือมีน้อย</li>
+              <li>ไม่มีปีก / เขา / หางซับซ้อน</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gc gc-d show" id="gc-detailed">
+          <div class="gc-head">
+            <span class="gc-lbl">เยอะ (Detailed)</span>
+            <span class="gc-badge">+50% จากราคาปกติ</span>
+          </div>
+          <div class="gc-body">
+            <div class="gc-art">🧝</div>
+            <ul class="gc-pts">
+              <li>ชุดมีลวดลาย ปัก หรือ pattern เต็ม</li>
+              <li>ทรงผมซับซ้อน ถักเปีย / หลายสี</li>
+              <li>เครื่องประดับ / อุปกรณ์หลายชิ้น</li>
+              <li>ปีก · เขา · หาง · armor ดีเทลสูง</li>
+              <li>เอฟเฟกต์เวทมนตร์ หรือกลไก</li>
+            </ul>
+          </div>
+        </div>
+        <div class="guide-note">✦ ไม่แน่ใจ? ทักมาพร้อม reference แล้วช่วยประเมินให้ได้เลย</div>
+      </div>
+
+      <!-- USAGE guide -->
+      <div id="g-usage" style="display:none;display:flex;flex-direction:column;gap:10px">
+        <div class="gc gc-p show">
+          <div class="gc-head">
+            <span class="gc-lbl">🏠 ส่วนตัว (Personal)</span>
+            <span class="gc-badge">ราคาปกติ</span>
+          </div>
+          <ul class="gc-pts" style="margin-top:4px">
+            <li>ใช้เป็น profile picture หรือ avatar</li>
+            <li>โพสต์ลง SNS ส่วนตัว (IG, Twitter, FB)</li>
+            <li>ใช้ตกแต่งของใช้ส่วนตัว ไม่หาเงิน</li>
+            <li>ห้ามนำไปขายต่อหรือใช้ในนามองค์กร</li>
+          </ul>
+        </div>
+        <div class="gc gc-g show">
+          <div class="gc-head">
+            <span class="gc-lbl">🎁 Giveaway</span>
+            <span class="gc-badge">+20%</span>
+          </div>
+          <ul class="gc-pts" style="margin-top:4px">
+            <li>แจกในกิจกรรมออนไลน์ / stream</li>
+            <li>รางวัลใน community ที่ไม่ได้รับเงิน</li>
+            <li>โปรโมทช่องหรือเพจของตัวเองได้</li>
+            <li>ไม่ใช่เพื่อนำไปขายหรือใช้แบรนด์บริษัท</li>
+          </ul>
+        </div>
+        <div class="gc gc-c show">
+          <div class="gc-head">
+            <span class="gc-lbl">🏪 เชิงพาณิชย์ (Commercial)</span>
+            <span class="gc-badge">+50%</span>
+          </div>
+          <ul class="gc-pts" style="margin-top:4px">
+            <li>ใช้ใน merchandise ที่นำไปขาย (สติ๊กเกอร์, เสื้อ ฯลฯ)</li>
+            <li>เป็นโลโก้หรือ mascot ของแบรนด์บุคคล</li>
+            <li>ใช้โปรโมทธุรกิจขนาดเล็ก / freelance</li>
+            <li>รายได้จากงานไม่เกิน 1 ล้านบาท/ปี</li>
+          </ul>
+        </div>
+        <div class="gc gc-e show">
+          <div class="gc-head">
+            <span class="gc-lbl">🏢 สิทธิ์ขาด / บริษัท (Exclusive)</span>
+            <span class="gc-badge">ติดต่อโดยตรง</span>
+          </div>
+          <ul class="gc-pts" style="margin-top:4px">
+            <li>โอนลิขสิทธิ์ทั้งหมดให้ผู้ว่าจ้าง</li>
+            <li>ใช้ในนามบริษัทหรือองค์กร</li>
+            <li>ใช้ใน campaign โฆษณา / สื่อกว้าง</li>
+            <li>ราคาขึ้นอยู่กับขอบเขตการใช้งาน — ต้องทักคุย</li>
+          </ul>
+        </div>
+        <div class="guide-note">✦ ไม่แน่ใจว่าใช้แบบไหน? ทักมาเล่าให้ฟังก่อนได้เลย ไม่คิดค่าปรึกษา</div>
+      </div>
+    </div><!-- /guide -->
+  </div>
+</section>
+<hr class="sep">
+
+<!-- QUEUE -->
+<section class="sec" id="queue">
+  <div class="sec-tag">Queue Status</div>
+  <div class="sec-title">คิวงาน</div>
+  <div class="qbox">
+    <div class="qworking">
+      <div>
+        <div class="qw-lbl">กำลังทำอยู่</div>
+        <div class="qw-id">#A105</div>
+        <div class="ptrack">
+          <span class="pstep done">Sketch</span>
+          <span class="pstep done">Line</span>
+          <span class="pstep cur">Color</span>
+          <span class="pstep">Done</span>
+        </div>
+      </div>
+      <span class="qcount">3 คิวรออยู่</span>
+    </div>
+    <div>
+      <div class="qrow"><div class="qrl"><span class="qnum">1</span><span class="qid">#A106</span></div><div style="display:flex;align-items:center;gap:8px"><span class="qtype">Full Body</span><span class="qbadge">รอ</span></div></div>
+      <div class="qrow"><div class="qrl"><span class="qnum">2</span><span class="qid">#A107</span></div><div style="display:flex;align-items:center;gap:8px"><span class="qtype">Chibi ×2</span><span class="qbadge">รอ</span></div></div>
+      <div class="qrow"><div class="qrl"><span class="qnum">3</span><span class="qid">#A108</span></div><div style="display:flex;align-items:center;gap:8px"><span class="qtype">Half Body</span><span class="qbadge">รอ</span></div></div>
+    </div>
+    <div class="qfoot">อัปเดตล่าสุด: 2 ชั่วโมงที่แล้ว</div>
+  </div>
+</section>
+<hr class="sep">
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="sec-tag">Contact</div>
+  <div class="sec-title">ติดต่อ</div>
+  <div class="cgrid">
+    <div class="ccard"><div class="cplat">Facebook</div><div class="chandle">ชัญญานุช ปาละนันทน์</div></div>
+    <div class="ccard"><div class="cplat">Twitter / X</div><div class="chandle">@LunariaZaner</div></div>
+  </div>
+  <div class="tos">
+    <div class="tos-ttl">วิธีจ้างงาน</div>
+    <ul class="tos-list">
+      <li>คำนวณราคาคร่าว ๆ ก่อน รวมถึงเลือกวัตถุประสงค์ให้ถูกต้อง</li>
+      <li>ทักมาพร้อม reference ตัวละครและแจ้งระดับดีเทล</li>
+      <li>รอยืนยันราคาจริงและรับ invoice</li>
+      <li>ชำระ 50% เพื่อเข้าคิว — ชำระส่วนที่เหลือก่อนรับไฟล์</li>
+    </ul>
+  </div>
+</section>
+
+<footer>© Art By LunariaZaner — ห้ามนำผลงานไปใช้เชิงพาณิชย์โดยไม่ได้รับอนุญาต</footer>
+
+<script>
+const opts={type:'chibi',detail:'simple',bg:'none',usage:'personal'};
+const base={chibi:500,half:800,full:1500};
+const extra={chibi:300,half:400,full:500};
+const mgn={chibi:200,half:300,full:500};
+const usageMult={personal:1,giveaway:1.5,commercial:2,exclusive:null};
+
+function calcPrice(){
+  const ex=document.getElementById('exclusive-msg');
+  const po=document.getElementById('price-out');
+  if(opts.usage==='exclusive'){
+    po.textContent='—';
+    ex.style.display='block';
+    return;
+  }
+  ex.style.display='none';
+  let b=base[opts.type];
+  const c=Math.max(1,parseInt(document.getElementById('chars').value)||1);
+  if(c>1) b+=(c-1)*extra[opts.type];
+  if(opts.detail==='detailed') b=Math.round(b*1.5);
+  if(opts.bg==='simple') b+=300;
+  if(opts.bg==='complex') b+=800;
+  b=Math.round(b*(usageMult[opts.usage]||1));
+  const hi=b+Math.round(mgn[opts.type]*(usageMult[opts.usage]||1));
+  po.textContent=b.toLocaleString()+' – '+hi.toLocaleString()+'฿';
+}
+
+function setOpt(key,el,val){
+  opts[key]=val;
+  el.closest('.rrow').querySelectorAll('.rbtn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  if(key==='detail'){
+    document.getElementById('gc-simple').style.opacity=val==='simple'?'1':'0.42';
+    document.getElementById('gc-detailed').style.opacity=val==='detailed'?'1':'0.42';
+  }
+  calcPrice();
+}
+
+const usageClasses={personal:'on-personal',giveaway:'on-giveaway',commercial:'on-commercial',exclusive:'on-exclusive'};
+function setUsage(el,val){
+  opts.usage=val;
+  ['personal','giveaway','commercial','exclusive'].forEach(k=>{
+    const b=document.getElementById('ubtn-'+k);
+    b.className='ubtn'+(k===val?' '+usageClasses[k]:'');
+  });
+  // auto-switch guide to usage tab and highlight
+  switchGuide(document.querySelectorAll('.gtab')[1],'usage');
+  // highlight active usage card
+  ['p','g','c','e'].forEach((s,i)=>{
+    const keys=['personal','giveaway','commercial','exclusive'];
+    document.querySelectorAll('#g-usage .gc')[i].style.opacity=keys[i]===val?'1':'0.38';
+  });
+  calcPrice();
+}
+
+function switchGuide(el,tab){
+  document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('g-detail').style.display=tab==='detail'?'flex':'none';
+  document.getElementById('g-detail').style.flexDirection='column';
+  document.getElementById('g-detail').style.gap='10px';
+  document.getElementById('g-usage').style.display=tab==='usage'?'flex':'none';
+  document.getElementById('g-usage').style.flexDirection='column';
+  document.getElementById('g-usage').style.gap='10px';
+}
+
+function filt(el,cat){
+  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.gcard').forEach(c=>{
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'block':'none';
+  });
+}
+
+// init
+document.getElementById('g-detail').style.display='flex';
+document.getElementById('g-detail').style.flexDirection='column';
+document.getElementById('g-detail').style.gap='10px';
+document.getElementById('ubtn-personal').className='ubtn on-personal';
+calcPrice();
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — ArtByNana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf6f0;--surface:#ffffff;--surface2:#f5efe6;--surface3:#ede4d8;
+  --border:rgba(160,120,80,0.15);--border2:rgba(160,120,80,0.28);
+  --text:#3a2c1e;--text2:#7a6150;--text3:#b09880;
+  --brown:#8b5e3c;--brown2:#c49a72;--cream:#f5ead8;
+  --pink:#e8a0b0;--pink-bg:rgba(232,160,176,0.12);--pink-bd:rgba(232,160,176,0.35);--pink-tx:#b05070;
+  --blue:#7aafc8;--blue-bg:rgba(122,175,200,0.12);--blue-bd:rgba(122,175,200,0.35);--blue-tx:#3a7a9c;
+  --green:#7ab87a;--green-bg:rgba(122,184,122,0.12);
+  --amber:#d4924a;--amber-bg:rgba(212,146,74,0.12);
+  --red-bg:rgba(200,100,100,0.1);--red-tx:#a04040;--red-bd:rgba(200,100,100,0.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans Thai',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;min-height:100vh}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+@media(max-width:700px){.layout{grid-template-columns:1fr}}
+
+/* SIDEBAR */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:24px 14px;display:flex;flex-direction:column;gap:3px}
+.sb-brand{font-family:'Playfair Display',serif;font-size:19px;color:var(--brown);padding:0 8px 20px;border-bottom:1px solid var(--border);margin-bottom:10px}
+.sb-brand span{display:block;font-size:10px;color:var(--text3);font-family:'Noto Sans Thai',sans-serif;font-weight:400;letter-spacing:2px;margin-top:3px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;color:var(--text2);cursor:pointer;transition:all .15s;border:none;background:none;width:100%;text-align:left;font-family:'Noto Sans Thai',sans-serif}
+.nav-item:hover{background:var(--surface2);color:var(--text)}
+.nav-item.active{background:var(--cream);color:var(--brown);font-weight:500;border:1px solid var(--border2)}
+.nav-icon{font-size:14px;width:18px;text-align:center}
+.sb-footer{margin-top:auto;padding-top:18px;border-top:1px solid var(--border)}
+.sb-note{font-size:11px;color:var(--text3);padding:0 8px;margin-bottom:8px}
+.view-link{display:block;padding:8px 12px;border:1px solid var(--border2);border-radius:8px;color:var(--text2);font-size:12px;text-decoration:none;text-align:center;transition:all .15s}
+.view-link:hover{border-color:var(--brown2);color:var(--brown);background:var(--surface2)}
+
+/* MAIN */
+.main{padding:32px;overflow-y:auto;background:var(--bg)}
+.page-hd{margin-bottom:26px}
+.page-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--brown)}
+.page-sub{font-size:13px;color:var(--text2);margin-top:3px}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:20px}
+.card-hd{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:14px;font-weight:500;color:var(--text)}
+.card-body{padding:20px 22px}
+
+/* STAT GRID */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stat{padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.stat-lbl{font-size:11px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;margin-bottom:5px}
+.stat-val{font-family:'Playfair Display',serif;font-size:28px;color:var(--brown)}
+.stat-sub{font-size:12px;color:var(--text3);margin-top:2px}
+
+/* STATUS SWITCHER */
+.s-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.s-opt{padding:16px 10px;border:1px solid var(--border2);border-radius:10px;text-align:center;cursor:pointer;transition:all .15s;background:transparent;font-family:'Noto Sans Thai',sans-serif}
+.s-opt:hover{background:var(--surface2)}
+.sdot{width:10px;height:10px;border-radius:50%;margin:0 auto 8px}
+.sdot-green{background:var(--green)}
+.sdot-amber{background:var(--amber)}
+.sdot-red{background:var(--red-tx)}
+.s-name{font-size:13px;font-weight:500;color:var(--text);display:block}
+.s-desc{font-size:11px;color:var(--text3);display:block;margin-top:2px}
+.a-open   {background:var(--green-bg);border-color:rgba(122,184,122,.35)}
+.a-busy   {background:var(--amber-bg);border-color:rgba(212,146,74,.35)}
+.a-closed {background:var(--red-bg);  border-color:var(--red-bd)}
+.current-box{margin-top:14px;padding:12px 16px;border-radius:8px;background:var(--surface2);border:1px solid var(--border);font-size:13px;color:var(--text2)}
+
+/* FORM */
+.field{margin-bottom:14px}
+.f-label{font-size:11px;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;display:block}
+.f-input,.f-select{width:100%;padding:9px 12px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:14px;font-family:'Noto Sans Thai',sans-serif;outline:none;transition:border-color .15s}
+.f-input:focus,.f-select:focus{border-color:var(--brown2)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* BUTTONS */
+.btn{padding:9px 20px;border-radius:8px;font-size:13px;font-family:'Noto Sans Thai',sans-serif;font-weight:500;cursor:pointer;border:none;transition:all .15s}
+.btn-brown{background:var(--brown);color:#fdf8f2}
+.btn-brown:hover{background:#6e4a2c}
+.btn-ghost{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
+.btn-ghost:hover{color:var(--text);border-color:var(--border2)}
+.btn-red{background:var(--red-bg);color:var(--red-tx);border:1px solid var(--red-bd)}
+.btn-red:hover{background:rgba(200,100,100,.18)}
+.btn-green{background:var(--green-bg);color:#4a8a4a;border:1px solid rgba(122,184,122,.35)}
+.btn-sm{padding:5px 12px;font-size:12px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+
+/* QUEUE TABLE */
+.qtable{width:100%;border-collapse:collapse}
+.qtable th{text-align:left;font-size:11px;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase;padding:0 12px 12px;border-bottom:1px solid var(--border)}
+.qtable td{padding:12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.qtable tr:last-child td{border-bottom:none}
+.qtable tr:hover td{background:var(--surface2)}
+.qid-cell{font-weight:500;color:var(--brown);font-size:14px}
+.type-badge{font-size:11px;padding:3px 10px;border-radius:100px;border:1px solid var(--border2);color:var(--text2);white-space:nowrap}
+.prog-mini{display:flex;gap:2px}
+.pm{font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--border);color:var(--text3)}
+.pm.done{background:var(--green-bg);color:#4a8a4a;border-color:rgba(122,184,122,.35)}
+.pm.cur{background:var(--pink-bg);color:var(--pink-tx);border-color:var(--pink-bd)}
+.working-tag{font-size:11px;padding:2px 10px;border-radius:100px;background:var(--green-bg);color:#4a8a4a;border:1px solid rgba(122,184,122,.35)}
+.step-btns{display:flex;gap:4px;flex-wrap:wrap}
+.step-btn{padding:4px 9px;border-radius:6px;font-size:11px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:'Noto Sans Thai',sans-serif;transition:all .12s}
+.step-btn:hover{background:var(--surface2);color:var(--text)}
+.step-btn.active{background:var(--cream);color:var(--brown);border-color:var(--brown2)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;border-radius:10px;background:var(--surface);border:1px solid var(--border2);color:var(--text);font-size:13px;box-shadow:0 4px 20px rgba(139,94,60,.12);transform:translateY(60px);opacity:0;transition:all .25s;z-index:999}
+.toast.show{transform:translateY(0);opacity:1}
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-brand">ArtByNana ✦ <span>ADMIN PANEL</span></div>
+    <button class="nav-item active" onclick="go('dashboard')"><span class="nav-icon">◈</span>Dashboard</button>
+    <button class="nav-item" onclick="go('queue')"><span class="nav-icon">≡</span>จัดการคิว</button>
+    <button class="nav-item" onclick="go('status')"><span class="nav-icon">◉</span>สถานะรับงาน</button>
+    <div class="sb-footer">
+      <div class="sb-note">หน้าที่ลูกค้าเห็น:</div>
+      <a href="index.html" target="_blank" class="view-link">เปิดหน้าเว็บ →</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <div id="page-dashboard">
+      <div class="page-hd">
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">ภาพรวมคิวและสถานะ</div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-lbl">คิวทั้งหมด</div><div class="stat-val" id="s-total">4</div><div class="stat-sub">งาน</div></div>
+        <div class="stat"><div class="stat-lbl">กำลังทำ</div><div class="stat-val" id="s-working">1</div><div class="stat-sub" id="s-working-id">#A105</div></div>
+        <div class="stat"><div class="stat-lbl">รออยู่</div><div class="stat-val" id="s-pending">3</div><div class="stat-sub">คิว</div></div>
+      </div>
+      <div class="card">
+        <div class="card-hd">
+          <span class="card-title">คิวล่าสุด</span>
+          <button class="btn btn-ghost btn-sm" onclick="go('queue')">จัดการทั้งหมด →</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="qtable" id="dash-table"></table>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUEUE -->
+    <div id="page-queue" style="display:none">
+      <div class="page-hd">
+        <div class="page-title">จัดการคิว</div>
+        <div class="page-sub">เพิ่ม ลบ อัปเดต progress</div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><span class="card-title">เพิ่มคิวใหม่</span></div>
+        <div class="card-body">
+          <div class="f-row">
+            <div class="field"><label class="f-label">Order ID</label><input class="f-input" id="new-id" placeholder="เช่น A109"></div>
+            <div class="field"><label class="f-label">ประเภทงาน</label>
+              <select class="f-select" id="new-type">
+                <option>Chibi</option><option>Half Body</option><option>Full Body</option>
+                <option>Chibi ×2</option><option>Full Body ×2</option>
+              </select>
+            </div>
+          </div>
+          <div class="btn-row"><button class="btn btn-brown" onclick="addQ()">+ เพิ่มคิว</button></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><span class="card-title">คิวทั้งหมด</span><span id="q-count-lbl" style="font-size:12px;color:var(--text2)"></span></div>
+        <div style="overflow-x:auto"><table class="qtable" id="main-table"></table></div>
+      </div>
+    </div>
+
+    <!-- STATUS -->
+    <div id="page-status" style="display:none">
+      <div class="page-hd">
+        <div class="page-title">สถานะรับงาน</div>
+        <div class="page-sub">สถานะนี้จะแสดงบนหน้าเว็บลูกค้า</div>
+      </div>
+      <div class="card" style="max-width:480px">
+        <div class="card-hd"><span class="card-title">เลือกสถานะ</span></div>
+        <div class="card-body">
+          <div class="s-grid">
+            <div class="s-opt" id="so-open" onclick="setSt('open')">
+              <div class="sdot sdot-green"></div>
+              <span class="s-name">ว่าง</span>
+              <span class="s-desc">รับงานเต็มที่</span>
+            </div>
+            <div class="s-opt a-busy" id="so-busy" onclick="setSt('busy')">
+              <div class="sdot sdot-amber"></div>
+              <span class="s-name">ใกล้เต็ม</span>
+              <span class="s-desc">รับงานอยู่</span>
+            </div>
+            <div class="s-opt" id="so-closed" onclick="setSt('closed')">
+              <div class="sdot sdot-red"></div>
+              <span class="s-name">ปิดรับ</span>
+              <span class="s-desc">ไม่รับงานใหม่</span>
+            </div>
+          </div>
+          <div class="current-box">
+            สถานะปัจจุบัน: <span id="st-text" style="color:var(--amber);font-weight:500">รับงานอยู่ · เหลือ 3 คิว</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+let Q=[
+  {id:'A105',type:'Full Body',step:2,status:'working'},
+  {id:'A106',type:'Full Body',step:0,status:'pending'},
+  {id:'A107',type:'Chibi ×2',step:0,status:'pending'},
+  {id:'A108',type:'Half Body',step:0,status:'pending'},
+];
+let siteStatus='busy';
+const steps=['Sketch','Line','Color','Done'];
+
+function go(p){
+  ['dashboard','queue','status'].forEach(n=>document.getElementById('page-'+n).style.display=n===p?'block':'none');
+  document.querySelectorAll('.nav-item').forEach((b,i)=>b.classList.toggle('active',['dashboard','queue','status'][i]===p));
+  renderAll();
+}
+
+function renderAll(){renderDash();renderMain();updateStats()}
+
+function progHtml(step){
+  return '<div class="prog-mini">'+steps.map((s,i)=>`<span class="pm ${i<step?'done':i===step?'cur':''}">${s}</span>`).join('')+'</div>';
+}
+
+function renderDash(){
+  document.getElementById('dash-table').innerHTML=
+    '<tr><th>ID</th><th>ประเภท</th><th>Progress</th><th>สถานะ</th></tr>'+
+    Q.map(q=>`<tr>
+      <td class="qid-cell">#${q.id}</td>
+      <td><span class="type-badge">${q.type}</span></td>
+      <td>${progHtml(q.step)}</td>
+      <td>${q.status==='working'?'<span class="working-tag">กำลังทำ</span>':'<span style="font-size:12px;color:var(--text3)">รอ</span>'}</td>
+    </tr>`).join('');
+}
+
+function renderMain(){
+  const lbl=document.getElementById('q-count-lbl');
+  if(lbl) lbl.textContent=Q.length+' งาน';
+  document.getElementById('main-table').innerHTML=
+    '<tr><th>ID</th><th>ประเภท</th><th>Progress</th><th>อัปเดต Step</th><th>จัดการ</th></tr>'+
+    Q.map((q,i)=>`<tr>
+      <td class="qid-cell">#${q.id}</td>
+      <td><span class="type-badge">${q.type}</span></td>
+      <td>${progHtml(q.step)}</td>
+      <td><div class="step-btns">${steps.map((s,si)=>`<button class="step-btn${q.step===si?' active':''}" onclick="setStep(${i},${si})">${s}</button>`).join('')}</div></td>
+      <td><div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${q.status==='pending'?`<button class="btn btn-green btn-sm" onclick="setWorking(${i})">▶ Working</button>`:''}
+        <button class="btn btn-red btn-sm" onclick="delQ(${i})">ลบ</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function updateStats(){
+  document.getElementById('s-total').textContent=Q.length;
+  const w=Q.filter(q=>q.status==='working');
+  document.getElementById('s-working').textContent=w.length;
+  document.getElementById('s-working-id').textContent=w.length?'#'+w[0].id:'—';
+  document.getElementById('s-pending').textContent=Q.filter(q=>q.status==='pending').length;
+}
+
+function addQ(){
+  const id=document.getElementById('new-id').value.trim();
+  const type=document.getElementById('new-type').value;
+  if(!id){toast('กรุณาใส่ Order ID');return}
+  if(Q.find(q=>q.id===id)){toast('ID นี้มีอยู่แล้ว');return}
+  Q.push({id,type,step:0,status:'pending'});
+  document.getElementById('new-id').value='';
+  renderAll();toast('เพิ่มคิว #'+id+' แล้ว ✓');
+}
+
+function delQ(i){const id=Q[i].id;Q.splice(i,1);renderAll();toast('ลบ #'+id+' แล้ว')}
+
+function setStep(i,s){Q[i].step=s;renderAll();toast('อัปเดต #'+Q[i].id+' → '+steps[s])}
+
+function setWorking(i){Q.forEach(q=>q.status='pending');Q[i].status='working';renderAll();toast('#'+Q[i].id+' → Working ✓')}
+
+function setSt(s){
+  siteStatus=s;
+  ['open','busy','closed'].forEach(k=>{
+    document.getElementById('so-'+k).className='s-opt'+(k===s?' a-'+k:'');
+  });
+  const labels={open:'ว่าง · พร้อมรับงาน',busy:'รับงานอยู่ · เหลือ '+Q.filter(q=>q.status==='pending').length+' คิว',closed:'ปิดรับงาน'};
+  const colors={open:'#4a8a4a',busy:'var(--amber)',closed:'var(--red-tx)'};
+  const el=document.getElementById('st-text');
+  el.textContent=labels[s];el.style.color=colors[s];
+  toast('อัปเดตสถานะ: '+labels[s]);
+}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+renderAll();
+</script>
+</body>
+</html>
